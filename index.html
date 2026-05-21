@@ -10,28 +10,31 @@
         :root {
             --bg-primary: #ffffff;
             --bg-secondary: #f8f9fa;
-            --bg-accent: #f0f4ff;
+            --bg-accent: #f0fdf9;
             --text-primary: #1a202c;
             --text-secondary: #4a5568;
             --text-tertiary: #718096;
             --border-color: #e2e8f0;
-            --accent-blue: #3b82f6;
-            --accent-blue-dark: #2563eb;
-            --accent-green: #10b981;
-            --accent-purple: #8b5cf6;
+            --accent-blue: #0d9488;
+            --accent-blue-dark: #0f766e;
+            --accent-green: #059669;
+            --accent-purple: #0d9488;
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
                 --bg-primary: #0f172a;
                 --bg-secondary: #1e293b;
-                --bg-accent: #1e3a8a;
+                --bg-accent: #0f766e;
                 --text-primary: #f1f5f9;
                 --text-secondary: #cbd5e1;
                 --text-tertiary: #94a3b8;
                 --border-color: #334155;
+                --accent-blue: #14b8a6;
+                --accent-blue-dark: #2dd4bf;
             }
         }
+
 
         * {
             margin: 0;
@@ -666,30 +669,7 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Hobbies Section -->
-        <div class="section">
-            <h2 class="section-title">Intereses</h2>
-            <div class="skills-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
-                <div class="skill-category">
-                    <h4>🎵</h4>
-                    <p>Interpretación musical (batería)</p>
-                </div>
-                <div class="skill-category">
-                    <h4>🎮</h4>
-                    <p>Gaming</p>
-                </div>
-                <div class="skill-category">
-                    <h4>📚</h4>
-                    <p>Ciencia ficción y fantasía</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Certificates Section -->
-        <div class="section">
-            <h2 class="section-title">Certificados</h2>
             <div class="certificates-gallery">
                 <div class="certificate-card" onclick="openCertificate(event)">
                     <img src="./certificates/data-analyst.png" alt="Data Analyst con Python">
@@ -700,12 +680,63 @@
                     <div class="certificate-label">Visualización y comunicación</div>
                 </div>
             </div>
+            
+            <div id="certificateModal" class="modal">
+                <div class="modal-content">
+                    <button class="modal-close" onclick="closeCertificate()">&times;</button>
+                    <img id="modalImage" src=""     alt="Certificate">
+                </div>
+            </div>
+
         </div>
 
-        <div id="certificateModal" class="modal">
-            <div class="modal-content">
-                <button class="modal-close" onclick="closeCertificate()">&times;</button>
-                <img id="modalImage" src="" alt="Certificate">
+        <!-- Hobbies Section -->
+        <div class="section">
+            <h2 class="section-title">Intereses</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>🎵 Música</h4>
+                    <p>Interpretación en batería</p>
+                    <p style="margin-top: 8px; margin-bottom: 0; color: var(--text-secondary); font-size: 13px;">Géneros</p>
+                    <div class="tech-stack" style="margin-top: 6px;">
+                        <span class="tech-badge">Rock</span>
+                        <span class="tech-badge">Grunge</span>
+                        <span class="tech-badge">Progressive Metal</span>
+                        <span class="tech-badge">Jazz Fusion</span>
+                    </div>
+                    <p style="margin: 8px 0 6px 0; color: var(--text-secondary); font-size: 13px;">Artistas</p>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Opeth</span>
+                        <span class="tech-badge">Frank Zappa</span>
+                        <span class="tech-badge">King Crimson</span>
+                        <span class="tech-badge">Alice in Chains</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>🎮 Gaming</h4>
+                    <p style="margin: 8px 0 6px 0; color: var(--text-secondary); font-size: 13px;">Juegos favoritos</p>
+                    <div class="tech-stack" style="margin-bottom: 12px;">
+                        <span class="tech-badge">World of Warcraft</span>
+                        <span class="tech-badge">Final Fantasy XIV</span>
+                        <span class="tech-badge">Chrono Trigger</span>
+                        <span class="tech-badge">Megaman</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>📚 Lectura</h4>
+                    <p style="margin: 8px 0 6px 0; color: var(--text-secondary); font-size: 13px;">Géneros</p>
+                    <div class="tech-stack" style="margin-bottom: 12px;">
+                        <span class="tech-badge">Ciencia Ficción</span>
+                        <span class="tech-badge">Fantasia</span>
+                        <span class="tech-badge">Manga</span>
+                    </div>
+                    <p style="margin: 8px 0 6px 0; color: var(--text-secondary); font-size: 13px;">Autores favoritos</p>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Isaac Asimov</span>
+                        <span class="tech-badge">Frank Herbert</span>
+                        <span class="tech-badge">Eichiro Oda</span>
+                    </div>
+                </div>
             </div>
         </div>
 
