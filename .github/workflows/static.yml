@@ -38,10 +38,12 @@ jobs:
       - name: Build and Deploy
         run: |
           mkdir -p docs
-          cp CV.md docs/
-          cp resume.pdf docs/
-          cp README.md docs/
-          cp index.html docs/
+          cp CV.md docs/resume.md
+          cp resume.pdf docs/resume.pdf
+          cp README.md docs/README.md
+          cp index.html docs/index.html
+          cp -r certificates docs/certificates
+
           echo "Files prepared"
 
       - name: Upload artifact
