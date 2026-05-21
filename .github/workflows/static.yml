@@ -5,6 +5,8 @@ on:
   # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
+  pull_request:
+    branches: ["main"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -23,7 +25,7 @@ concurrency:
 
 jobs:
   # Single deploy job since we're just deploying
-  deploy:
+  build-and-deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -38,15 +40,17 @@ jobs:
       - name: Build and Deploy
         run: |
           mkdir -p docs
-          cp resume.md docs/
+          cp CV.md docs/
           cp resume.pdf docs/
           cp README.md docs/
-          # Optional: Create index.html if needed
+          cp index.html docs/
+          echo "Files prepared"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: 'docs'
+          retention-days: 1
 
       - name: Deploy to GitHub Pages
         id: deployment
