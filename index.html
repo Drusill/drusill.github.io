@@ -3,793 +3,674 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Raúl Cid Bastías - Software Engineer & Data Science">
-    <title>Raúl Cid Bastías | Software Engineer</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' font-weight='bold' fill='%233b82f6'>R</text></svg>">
+    <meta name="description" content="Raúl Cid Bastías — Ingeniero de Software backend: microservicios, AWS, calidad y CI/CD.">
+    <meta name="theme-color" content="#0b1220">
+    <title>Raúl Cid Bastías | Ingeniero de Software</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230b1220'/><text x='50' y='70' font-size='62' text-anchor='middle' font-family='monospace' fill='%2322d3ee'>R</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8f9fa;
-            --bg-accent: #f0fdf9;
-            --text-primary: #1a202c;
-            --text-secondary: #4a5568;
-            --text-tertiary: #718096;
-            --border-color: #e2e8f0;
-            --accent-blue: #0d9488;
-            --accent-blue-dark: #0f766e;
-            --accent-green: #059669;
-            --accent-purple: #0d9488;
+            --bg: #0b1220;
+            --surface: #0e1828;
+            --surface-2: #122033;
+            --line: #1e3a4a;
+            --text: #d6e2ee;
+            --text-strong: #f1f5f9;
+            --text-dim: #8fa3b8;
+            --accent: #22d3ee;
+            --accent-soft: rgba(34, 211, 238, 0.12);
+            --accent-line: rgba(34, 211, 238, 0.35);
+            --font-sans: 'Space Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            color-scheme: dark;
         }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-primary: #0f172a;
-                --bg-secondary: #1e293b;
-                --bg-accent: #0f766e;
-                --text-primary: #f1f5f9;
-                --text-secondary: #cbd5e1;
-                --text-tertiary: #94a3b8;
-                --border-color: #334155;
-                --accent-blue: #14b8a6;
-                --accent-blue-dark: #2dd4bf;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--text-primary);
-            background-color: var(--bg-primary);
-            transition: background-color 0.3s ease, color 0.3s ease;
+            font-family: var(--font-sans);
+            line-height: 1.65;
+            color: var(--text);
+            background-color: var(--bg);
+            background-image:
+                radial-gradient(rgba(214, 226, 238, 0.07) 1px, transparent 1px),
+                radial-gradient(rgba(34, 211, 238, 0.05) 1px, transparent 1px);
+            background-size: 48px 48px, 120px 120px;
+            background-position: 0 0, 24px 60px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; text-underline-offset: 3px; }
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 880px;
             margin: 0 auto;
-            padding: 60px 24px;
+            padding: 64px 24px 48px;
         }
 
-        .header {
-            margin-bottom: 50px;
-            padding-bottom: 40px;
-            border-bottom: 2px solid var(--border-color);
+        .mono {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            letter-spacing: 0.06em;
+            color: var(--accent);
         }
+
+        /* Encabezado */
+        .header { margin-bottom: 36px; }
+
+        .header .mono { display: block; margin-bottom: 14px; }
 
         .name {
-            font-size: 42px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: -1px;
+            font-size: 46px;
+            font-weight: 600;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--text-strong);
         }
 
         .title {
-            font-size: 20px;
-            color: var(--accent-blue);
-            font-weight: 600;
-            margin-bottom: 16px;
+            font-size: 19px;
+            font-weight: 500;
+            color: var(--accent);
+            margin: 8px 0 18px;
         }
 
-        .contact-info {
+        .contact {
             display: flex;
             flex-wrap: wrap;
-            gap: 16px;
-            margin-bottom: 20px;
-            font-size: 14px;
+            gap: 8px 22px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            margin-bottom: 22px;
         }
 
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--text-secondary);
-        }
+        .contact span, .contact a { word-break: break-word; }
+        .contact .label { color: var(--text-dim); margin-right: 6px; }
 
-        .contact-item a {
-            color: var(--accent-blue);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .contact-item a:hover {
-            color: var(--accent-blue-dark);
-            text-decoration: underline;
-        }
-
-        .about-text {
-            color: var(--text-secondary);
+        .about {
+            max-width: 640px;
             font-size: 16px;
-            max-width: 600px;
-            line-height: 1.8;
+            color: var(--text);
         }
 
-        .section {
-            margin-bottom: 50px;
+        /* Panel de datos */
+        .panel {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1px;
+            background: var(--line);
+            border: 1px solid var(--line);
+            margin: 32px 0 56px;
         }
+
+        .panel::before, .panel::after {
+            content: "";
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-color: var(--accent);
+            border-style: solid;
+        }
+        .panel::before { top: -5px; left: -5px; border-width: 2px 0 0 2px; }
+        .panel::after { bottom: -5px; right: -5px; border-width: 0 2px 2px 0; }
+
+        .stat {
+            background: var(--surface);
+            padding: 14px 16px;
+        }
+
+        .stat .k {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+
+        .stat .v {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text-strong);
+            margin-top: 2px;
+        }
+
+        /* Secciones */
+        .section { margin-bottom: 56px; }
 
         .section-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 24px;
+            display: flex;
+            align-items: baseline;
+            gap: 14px;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-strong);
             padding-bottom: 12px;
-            border-bottom: 3px solid var(--accent-blue);
-            display: inline-block;
+            margin-bottom: 26px;
+            border-bottom: 1px solid var(--line);
         }
 
-        .job-entry {
-            margin-bottom: 32px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid var(--border-color);
+        .section-title .mono { font-size: 13px; }
+
+        .sub {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-strong);
+            margin: 28px 0 12px;
         }
 
-        .job-entry:last-child {
-            border-bottom: none;
+        /* Trayectoria */
+        .job {
+            position: relative;
+            padding-left: 22px;
+            margin-bottom: 34px;
+            border-left: 1px solid var(--line);
+        }
+
+        .job::before {
+            content: "";
+            position: absolute;
+            left: -5px;
+            top: 9px;
+            width: 9px;
+            height: 9px;
+            background: var(--bg);
+            border: 2px solid var(--accent);
+            transform: rotate(45deg);
+        }
+
+        .job-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 4px 16px;
         }
 
         .job-title {
             font-size: 18px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 4px;
+            font-weight: 500;
+            color: var(--text-strong);
         }
 
-        .company-period {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 12px;
-            font-size: 14px;
-        }
-
-        .company {
-            color: var(--accent-blue);
-            font-weight: 600;
-        }
+        .job-title .company { color: var(--accent); }
 
         .period {
-            color: var(--text-tertiary);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-dim);
+            white-space: nowrap;
         }
 
-        .job-description {
-            color: var(--text-secondary);
-            margin: 12px 0;
-            padding-left: 0;
+        .job ul {
+            list-style: none;
+            margin: 12px 0 14px;
         }
 
-        .job-description li {
+        .job li {
+            position: relative;
+            padding-left: 18px;
             margin-bottom: 8px;
-            margin-left: 20px;
+            color: var(--text);
         }
 
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 16px;
+        .job li::before {
+            content: "›";
+            position: absolute;
+            left: 2px;
+            color: var(--accent);
+            font-family: var(--font-mono);
         }
 
-        .tech-badge {
-            display: inline-block;
-            background-color: var(--bg-accent);
-            color: var(--accent-blue);
-            padding: 4px 10px;
-            border-radius: 20px;
+        .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+
+        .chip {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: #9be7f5;
+            background: var(--accent-soft);
+            border: 1px solid var(--accent-line);
+            padding: 2px 9px;
+            border-radius: 3px;
+        }
+
+        /* Stack */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            padding: 16px 18px;
+            transition: border-color 0.2s ease;
+        }
+
+        .card:hover { border-color: var(--accent-line); }
+
+        .card h3 {
+            font-family: var(--font-mono);
             font-size: 12px;
             font-weight: 500;
-            border: 1px solid var(--accent-blue);
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 0;
-        }
-
-        .skill-category {
-            padding: 20px;
-            background-color: var(--bg-secondary);
-            border-radius: 8px;
-            border-left: 4px solid var(--accent-blue);
-        }
-
-        .skill-category h4 {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--accent-blue);
-            margin-bottom: 12px;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .skill-category p {
-            color: var(--text-secondary);
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .education-entry {
-            margin-bottom: 28px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .education-entry:last-child {
-            border-bottom: none;
-        }
-
-        .degree {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-        }
-
-        .school {
-            color: var(--accent-green);
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
-
-        .education-period {
-            color: var(--text-tertiary);
-            font-size: 14px;
+            color: var(--accent);
             margin-bottom: 8px;
         }
 
-        .education-details {
-            color: var(--text-secondary);
-            font-size: 14px;
-            margin-top: 8px;
+        .card p { font-size: 14px; color: var(--text); }
+
+        /* Formación */
+        .edu { margin-bottom: 22px; }
+
+        .edu-name {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-strong);
         }
+
+        .edu-meta {
+            font-size: 14px;
+            color: var(--text-dim);
+        }
+
+        .edu-meta .school { color: var(--accent); }
+
+        .edu-detail { font-size: 14px; margin-top: 4px; }
 
         .publication {
-            background-color: var(--bg-secondary);
-            padding: 16px;
-            border-radius: 8px;
-            margin-top: 12px;
-            border-left: 4px solid var(--accent-purple);
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--accent);
+            padding: 16px 18px;
+            margin-top: 10px;
         }
 
-        .publication-text {
-            color: var(--text-secondary);
-            font-size: 14px;
-            margin-bottom: 8px;
-            font-style: italic;
+        .publication .paper {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-strong);
         }
 
-        .publication-citation {
-            color: var(--text-tertiary);
+        .publication .cite {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+
+        .publication a {
+            font-family: var(--font-mono);
             font-size: 12px;
-        }
-
-        .publication-doi {
-            color: var(--accent-blue);
-            text-decoration: none;
             word-break: break-all;
         }
 
-        .publication-doi:hover {
-            text-decoration: underline;
-        }
-
+        /* Certificaciones */
         .cert-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 10px;
         }
 
-        .cert-item {
-            background-color: var(--bg-secondary);
-            padding: 12px 16px;
-            border-radius: 6px;
-            border-left: 3px solid var(--accent-green);
+        .cert {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            padding: 10px 14px;
             font-size: 14px;
-            color: var(--text-secondary);
         }
 
-        .cert-item strong {
-            color: var(--text-primary);
-        }
+        .cert strong { font-weight: 500; color: var(--text-strong); display: block; }
+        .cert span { font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); }
 
-        .footer-cta {
-            display: flex;
-            gap: 12px;
-            margin-top: 40px;
-            padding-top: 40px;
-            border-top: 2px solid var(--border-color);
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.2s;
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-primary {
-            background-color: var(--accent-blue);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--accent-blue-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-        }
-
-        .btn-secondary {
-            background-color: var(--bg-secondary);
-            color: var(--text-primary);
-            border: 2px solid var(--border-color);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--accent-blue);
-            color: var(--accent-blue);
-        }
-
-        .language {
-            background-color: var(--bg-secondary);
-            padding: 12px 16px;
-            border-radius: 6px;
-            display: inline-block;
-            margin-right: 12px;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 40px 16px;
-            }
-
-            .name {
-                font-size: 32px;
-            }
-
-            .title {
-                font-size: 18px;
-            }
-
-            .section-title {
-                font-size: 20px;
-            }
-
-            .company-period {
-                flex-direction: column;
-                gap: 2px;
-            }
-
-            .footer-cta {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .cert-list {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .divider {
-            margin: 8px 0;
-        }
-
-        .certificates-gallery {
+        .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 16px;
+            gap: 14px;
             margin-top: 16px;
         }
 
         .certificate-card {
             position: relative;
             overflow: hidden;
-            border-radius: 8px;
-            background-color: var(--bg-secondary);
-            border: 2px solid var(--border-color);
-            transition: all 0.3s ease;
+            aspect-ratio: 3 / 2;
+            padding: 0;
+            border: 1px solid var(--line);
+            background: var(--surface);
             cursor: pointer;
-            aspect-ratio: 3/2;
+            transition: border-color 0.2s ease, transform 0.2s ease;
         }
 
-        .certificate-card:hover {
-            border-color: var(--accent-blue);
-            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);
-            transform: translateY(-4px);
-        }
+        .certificate-card:hover { border-color: var(--accent); transform: translateY(-3px); }
 
         .certificate-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .certificate-card:hover img {
-            transform: scale(1.05);
+            display: block;
         }
 
         .certificate-label {
             position: absolute;
-            bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-            color: white;
-            padding: 12px 8px;
-            font-size: 12px;
-            font-weight: 500;
+            bottom: 0;
+            padding: 10px 8px;
+            background: rgba(11, 18, 32, 0.88);
+            border-top: 1px solid var(--line);
+            color: var(--text-strong);
+            font-family: var(--font-mono);
+            font-size: 11px;
             text-align: center;
         }
 
+        .languages { display: flex; flex-wrap: wrap; gap: 10px; }
+
+        .lang {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            padding: 8px 14px;
+            font-size: 14px;
+        }
+
+        .lang .mono { margin-right: 8px; }
+
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
+            inset: 0;
             z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
+            background: rgba(5, 9, 16, 0.85);
             padding: 20px;
             overflow: auto;
         }
 
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        .modal.active { display: flex; align-items: center; justify-content: center; }
 
         .modal-content {
             position: relative;
-            background-color: var(--bg-primary);
             max-width: 90%;
             max-height: 90%;
-            border-radius: 8px;
+            border: 1px solid var(--line);
+            background: var(--surface);
             overflow: auto;
         }
 
-        .modal-content img {
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            display: block;
-        }
+        .modal-content img { display: block; max-width: 100%; height: auto; }
 
         .modal-close {
             position: absolute;
-            top: 16px;
-            right: 16px;
-            background-color: var(--accent-blue);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 24px;
+            top: 12px;
+            right: 12px;
+            width: 38px;
+            height: 38px;
+            border: 1px solid var(--accent);
+            background: var(--bg);
+            color: var(--accent);
+            font-size: 22px;
+            line-height: 1;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.2s;
         }
 
-        .modal-close:hover {
-            background-color: var(--accent-blue-dark);
+        .modal-close:hover { background: var(--accent); color: var(--bg); }
+
+        /* Pie */
+        .footer {
+            border-top: 1px solid var(--line);
+            padding-top: 32px;
+        }
+
+        .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 20px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 500;
+            border: 1px solid var(--accent);
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .btn:hover { text-decoration: none; }
+
+        .btn-primary { background: var(--accent); color: var(--bg); }
+        .btn-primary:hover { background: #67e8f9; }
+
+        .btn-secondary { background: transparent; color: var(--accent); }
+        .btn-secondary:hover { background: var(--accent-soft); }
+
+        .offline {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-bottom: 10px;
+        }
+
+        .offline .mono { margin-right: 8px; }
+
+        .signoff {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-dim);
+            opacity: 0.85;
+        }
+
+        @media (max-width: 640px) {
+            .container { padding: 40px 18px 36px; }
+            .name { font-size: 34px; }
+            .title { font-size: 17px; }
+            .section-title { font-size: 19px; }
+            .btn { width: 100%; justify-content: center; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { transition: none !important; animation: none !important; }
+            .certificate-card:hover { transform: none; }
+        }
+
+        @media print {
+            :root {
+                --bg: #ffffff; --surface: #ffffff; --line: #cccccc;
+                --text: #1a1a1a; --text-strong: #000000; --text-dim: #555555;
+                --accent: #0e7490; --accent-soft: transparent; --accent-line: #999999;
+            }
+            body { background: #ffffff; background-image: none; }
+            .container { padding: 0; max-width: none; }
+            .chip { color: #0e7490; }
+            .gallery, .modal, .cta, .signoff, .panel::before, .panel::after { display: none !important; }
+            .section, .job, .card, .publication { break-inside: avoid; }
+            a { color: #000000; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
-        <div class="header">
+        <header class="header">
+            <span class="mono">// TERMINAL · SANTIAGO, CL</span>
             <h1 class="name">Raúl Cid Bastías</h1>
-            <div class="title">Ingeniero Civil en Computación</div>
+            <div class="title">Ingeniero de Software · Backend</div>
 
-            <div class="contact-info">
-                <div class="contact-item">
-                    <span>📧</span>
-                    <a href="mailto:rad.cidbastias@gmail.com">rad.cidbastias@gmail.com</a>
-                </div>
-                <div class="contact-item">
-                    <span>📱</span>
-                    <span>+56 9 6743 2829</span>
-                </div>
-                <div class="contact-item">
-                    <span>🔗</span>
-                    <a href="https://www.linkedin.com/in/drusill" target="_blank">LinkedIn</a>
-                </div>
+            <div class="contact">
+                <span><span class="label">email</span><a href="mailto:rad.cidbastias@gmail.com">rad.cidbastias@gmail.com</a></span>
+                <span><span class="label">tel</span>+56 9 6743 2829</span>
+                <span><span class="label">in</span><a href="https://www.linkedin.com/in/drusill" target="_blank" rel="noopener">linkedin.com/in/drusill</a></span>
             </div>
 
-            <p class="about-text">
+            <p class="about">
                 Ingeniero Civil en Computación con más de 4 años de experiencia en desarrollo backend y frontend (Vue), y desarrollo asistido por IA con Claude Code. Interesado en ingeniería y ciencia de datos, machine learning y robótica.
             </p>
+        </header>
+
+        <div class="panel" aria-label="Resumen">
+            <div class="stat"><div class="k">Experiencia</div><div class="v">4+ años</div></div>
+            <div class="stat"><div class="k">En producción</div><div class="v">3–4 sistemas</div></div>
+            <div class="stat"><div class="k">Cloud</div><div class="v">AWS · GCP</div></div>
+            <div class="stat"><div class="k">Núcleo</div><div class="v">Java · Python · Go</div></div>
         </div>
 
-        <!-- Experience Section -->
-        <div class="section">
-            <h2 class="section-title">Trayectoria Profesional</h2>
+        <main>
+            <section class="section" id="trayectoria">
+                <h2 class="section-title"><span class="mono">01 —</span>Trayectoria</h2>
 
-            <div class="job-entry">
-                <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
-                    <div>
-                        <div class="job-title">Ingeniero de Software — Tranciti</div>
-                        <div class="period">Ago 2025 – Presente · Santiago, CL</div>
+                <article class="job">
+                    <div class="job-head">
+                        <h3 class="job-title">Ingeniero de Software — <span class="company">Tranciti</span></h3>
+                        <span class="period">Ago 2025 — hoy · Santiago, CL</span>
                     </div>
-                </div>
-                <ul class="job-description" style="margin: 12px 0; padding-left: 20px;">
-                    <li>Diseño, desarrollo y mantención de microservicios para 3–4 sistemas de logística de transporte, además de soporte a otros sistemas, desplegados en AWS (Java, Python, Go; Lambda, contenedores).</li>
-                    <li>Desarrollo frontend en Vue y TypeScript aplicando la librería de diseño interna.</li>
-                    <li>Participación en concurso interno de adopción de la metodología AI-DLC de AWS (en curso): desarrollo con Claude Code de una funcionalidad para clientes, desplegada en producción, con requisitos y diseño versionados en el repositorio.</li>
-                    <li>Creación de skills propias para Claude Code que automatizan la revisión de merge requests: tests, lógica y bugs, y coherencia con el ticket y con ramas homónimas en repositorios relacionados.</li>
-                    <li>Aseguramiento de calidad mediante revisión de pares, testing (pruebas unitarias y de integración) y pipelines CI/CD (GitLab).</li>
-                </ul>
-                <div class="tech-stack">
-                    <span class="tech-badge">Java</span>
-                    <span class="tech-badge">Python</span>
-                    <span class="tech-badge">Go</span>
-                    <span class="tech-badge">AWS Lambda</span>
-                    <span class="tech-badge">Docker</span>
-                    <span class="tech-badge">GitLab</span>
-                    <span class="tech-badge">Vue</span>
-                    <span class="tech-badge">TypeScript</span>
-                    <span class="tech-badge">Claude Code</span>
-                </div>
-            </div>
-
-            <div class="job-entry">
-                <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
-                    <div>
-                        <div class="job-title">Ingeniero de Software — RiskAmerica</div>
-                        <div class="period">Feb 2022 – Mar 2025 · Santiago, CL</div>
+                    <ul>
+                        <li>Diseño, desarrollo y mantención de microservicios para 3–4 sistemas de logística de transporte, además de soporte a otros sistemas, desplegados en AWS (Java, Python, Go; Lambda, contenedores).</li>
+                        <li>Desarrollo frontend en Vue y TypeScript aplicando la librería de diseño interna.</li>
+                        <li>Participación en concurso interno de adopción de la metodología AI-DLC de AWS (en curso): desarrollo con Claude Code de una funcionalidad para clientes, desplegada en producción, con requisitos y diseño versionados en el repositorio.</li>
+                        <li>Creación de skills propias para Claude Code que automatizan la revisión de merge requests: tests, lógica y bugs, y coherencia con el ticket y con ramas homónimas en repositorios relacionados.</li>
+                        <li>Aseguramiento de calidad mediante revisión de pares, testing (pruebas unitarias y de integración) y pipelines CI/CD (GitLab).</li>
+                    </ul>
+                    <div class="chips">
+                        <span class="chip">Java</span><span class="chip">Python</span><span class="chip">Go</span>
+                        <span class="chip">AWS Lambda</span><span class="chip">Vue</span><span class="chip">TypeScript</span>
+                        <span class="chip">Claude Code</span><span class="chip">GitLab CI/CD</span>
                     </div>
-                </div>
-                <ul class="job-description" style="margin: 12px 0; padding-left: 20px;">
-                    <li>Desarrollo de BackOffice para ~30 administradoras de fondos (de 2–3 hasta ~20 fondos por cliente): APIs RESTful, modelos de dominio, ETL y reportería financiera (PHP, Laravel).</li>
-                    <li>Aseguramiento de calidad mediante revisión de pares y pruebas automatizadas (GitLab).</li>
-                    <li>Gestión de incidencias en producción y colaboración con equipos contables (SQL, PHP, Google Cloud Platform, GitLab).</li>
-                </ul>
-                <div class="tech-stack">
-                    <span class="tech-badge">PHP</span>
-                    <span class="tech-badge">Laravel</span>
-                    <span class="tech-badge">SQL</span>
-                    <span class="tech-badge">GCP</span>
-                    <span class="tech-badge">GitLab</span>
-                </div>
-            </div>
+                </article>
 
-        </div>
+                <article class="job">
+                    <div class="job-head">
+                        <h3 class="job-title">Ingeniero de Software — <span class="company">RiskAmerica</span></h3>
+                        <span class="period">Feb 2022 — Mar 2025 · Santiago, CL</span>
+                    </div>
+                    <ul>
+                        <li>Desarrollo de BackOffice para ~30 administradoras de fondos (de 2–3 hasta ~20 fondos por cliente): APIs RESTful, modelos de dominio, ETL y reportería financiera (PHP, Laravel).</li>
+                        <li>Aseguramiento de calidad mediante revisión de pares y pruebas automatizadas (GitLab).</li>
+                        <li>Gestión de incidencias en producción y colaboración con equipos contables (SQL, PHP, Google Cloud Platform, GitLab).</li>
+                    </ul>
+                    <div class="chips">
+                        <span class="chip">PHP</span><span class="chip">Laravel</span><span class="chip">SQL</span>
+                        <span class="chip">ETL</span><span class="chip">GCP</span><span class="chip">GitLab</span>
+                    </div>
+                </article>
+            </section>
 
-        <!-- Skills Section -->
-        <div class="section">
-            <h2 class="section-title">Tecnologías clave</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h4>Lenguajes</h4>
-                    <p>Python, Java, Go, TypeScript, JavaScript, PHP</p>
+            <section class="section" id="stack">
+                <h2 class="section-title"><span class="mono">02 —</span>Stack</h2>
+                <div class="grid">
+                    <div class="card"><h3>Lenguajes</h3><p>Python, Java, Go, TypeScript, JavaScript, PHP</p></div>
+                    <div class="card"><h3>Frameworks / libs</h3><p>Spring Boot, Quarkus, Django, Laravel, Node.js, Vue</p></div>
+                    <div class="card"><h3>Cloud &amp; DevOps</h3><p>Docker, GitLab CI/CD, Linux, AWS (Lambda, Step Functions, S3, EC2, ECS, CloudWatch, CloudFormation), Google Cloud Platform</p></div>
+                    <div class="card"><h3>Datos &amp; ML</h3><p>SQL (PostgreSQL, MySQL), ETL, Pandas, Scikit-learn, NumPy</p></div>
+                    <div class="card"><h3>IA aplicada al desarrollo</h3><p>Claude Code, Skills personalizadas, Metodología AI-DLC (AWS), Superpowers</p></div>
+                    <div class="card"><h3>Metodologías</h3><p>Scrum (integrante del equipo de desarrollo), Revisión de pares, CI/CD</p></div>
                 </div>
-                <div class="skill-category">
-                    <h4>Frameworks / libs</h4>
-                    <p>Spring Boot, Quarkus, Django, Laravel, Node.js, Vue</p>
-                </div>
-                <div class="skill-category">
-                    <h4>Datos & ML</h4>
-                    <p>SQL (PostgreSQL, MySQL), ETL, Pandas, Scikit-learn, NumPy</p>
-                </div>
-                <div class="skill-category">
-                    <h4>Cloud & DevOps</h4>
-                    <p>Docker, GitLab CI/CD, Linux, AWS (Lambda, Step Functions, S3, EC2, ECS, CloudWatch, CloudFormation), Google Cloud Platform</p>
-                </div>
-                <div class="skill-category">
-                    <h4>IA aplicada al desarrollo</h4>
-                    <p>Claude Code, Skills personalizadas, Metodología AI-DLC (AWS), Superpowers</p>
-                </div>
-                <div class="skill-category">
-                    <h4>Metodologías</h4>
-                    <p>Scrum (integrante del equipo de desarrollo), Revisión de pares, CI/CD</p>
-                </div>
-            </div>
-        </div>
+            </section>
 
-        <!-- Education Section -->
-        <div class="section">
-            <h2 class="section-title">Educación</h2>
+            <section class="section" id="formacion">
+                <h2 class="section-title"><span class="mono">03 —</span>Formación</h2>
 
-            <div class="education-entry">
-                <div class="degree">Ingeniería Civil en Computación</div>
-                <div class="school">Universidad de Chile</div>
-                <div class="education-period">2013 – 2021 (distinción máxima)</div>
-                <div class="education-details">Proyecto de título: Linked Data Browser (herramienta educativa para la Web de Datos)</div>
-            </div>
+                <div class="edu">
+                    <div class="edu-name">Ingeniería Civil en Computación</div>
+                    <div class="edu-meta"><span class="school">Universidad de Chile</span> · 2013 – 2021 · distinción máxima</div>
+                    <div class="edu-detail">Proyecto de título: Linked Data Browser (herramienta educativa para la Web de Datos)</div>
+                </div>
 
-            <div class="education-entry">
-                <div class="degree">Diplomado en Ciencia de Datos</div>
-                <div class="school">Desafío Latam</div>
-                <div class="education-period">Jun 2025 – May 2026 (finalizado)</div>
-            </div>
+                <div class="edu">
+                    <div class="edu-name">Diplomado en Ciencia de Datos</div>
+                    <div class="edu-meta"><span class="school">Desafío Latam</span> · Jun 2025 – May 2026 · finalizado</div>
+                </div>
 
-
-            <div class="education-entry">
-                <div class="degree">Publicación</div>
-                <div class="school">ACM Web Conference 2023</div>
+                <h3 class="sub">Publicación</h3>
                 <div class="publication">
-                    <div class="publication-text">
-                        "RDF Playground: An Online Tool for Learning about the Semantic Web"
-                    </div>
-                    <div class="publication-citation">
-                        B. Inostroza, R. Cid, A. Hogan
-                        <br>
-                        DOI: <a href="https://doi.org/10.1145/3543873.3587325" target="_blank" class="publication-doi">https://doi.org/10.1145/3543873.3587325</a>
-                    </div>
+                    <div class="paper">"RDF Playground: An Online Tool for Learning about the Semantic Web"</div>
+                    <div class="cite">ACM Web Conference 2023 · B. Inostroza, R. Cid, A. Hogan</div>
+                    <a href="https://doi.org/10.1145/3543873.3587325" target="_blank" rel="noopener">doi.org/10.1145/3543873.3587325</a>
                 </div>
-            </div>
+            </section>
 
-        </div>
+            <section class="section" id="certificaciones">
+                <h2 class="section-title"><span class="mono">04 —</span>Certificaciones e idiomas</h2>
 
-        <!-- Languages & Certifications -->
-        <div class="section">
-            <h2 class="section-title">Idiomas & Certificaciones</h2>
-
-            <div style="margin-bottom: 24px;">
-                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text-primary);">Idiomas</h3>
-                <div class="language">Español: Nativo</div>
-                <div class="language">Inglés: Intermedio (B1 — TOEFL ITP 2019)</div>
-            </div>
-
-            <div>
-                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text-primary);">Certificaciones y cursos</h3>
                 <div class="cert-list">
-                    <div class="cert-item">
-                        <strong>Data Science</strong><br>
-                        <span style="font-size: 12px;">Desafío Latam — May 2026</span>
-                    </div>
-                    <div class="cert-item">
-                        <strong>Data Analyst con Python</strong><br>
-                        <span style="font-size: 12px;">Desafío Latam — May 2026</span>
-                    </div>
-                    <div class="cert-item">
-                        <strong>Modelos avanzados y Redes Neuronales</strong><br>
-                        <span style="font-size: 12px;">Desafío Latam — May 2026</span>
-                    </div>
-                    <div class="cert-item">
-                        <strong>Machine Learning</strong><br>
-                        <span style="font-size: 12px;">Desafío Latam — Mar 2026</span>
-                    </div>
-                    <div class="cert-item">
-                        <strong>Visualización y comunicación de insights</strong><br>
-                        <span style="font-size: 12px;">Desafío Latam — Dic 2025</span>
-                    </div>
-                    <div class="cert-item">
-                        <strong>Análisis estadístico con Python</strong><br>
-                        <span style="font-size: 12px;">Desafío Latam — Oct 2025</span>
-                    </div>
+                    <div class="cert"><strong>Data Science</strong><span>Desafío Latam · May 2026</span></div>
+                    <div class="cert"><strong>Data Analyst con Python</strong><span>Desafío Latam · May 2026</span></div>
+                    <div class="cert"><strong>Modelos avanzados y Redes Neuronales</strong><span>Desafío Latam · May 2026</span></div>
+                    <div class="cert"><strong>Machine Learning</strong><span>Desafío Latam · Mar 2026</span></div>
+                    <div class="cert"><strong>Visualización y comunicación de insights</strong><span>Desafío Latam · Dic 2025</span></div>
+                    <div class="cert"><strong>Análisis estadístico con Python</strong><span>Desafío Latam · Oct 2025</span></div>
                 </div>
-            </div>
 
-            <div class="certificates-gallery">
-                <div class="certificate-card" onclick="openCertificate(event)">
-                    <img src="./certificates/data-science.png" alt="Data Science">
-                    <div class="certificate-label">Data Science</div>
+                <div class="gallery">
+                    <button type="button" class="certificate-card" onclick="openCertificate(event)" aria-label="Ver certificado Data Analyst con Python">
+                        <img src="./certificates/data-analyst.png" alt="Certificado Data Analyst con Python">
+                        <span class="certificate-label">Data Analyst con Python</span>
+                    </button>
+                    <button type="button" class="certificate-card" onclick="openCertificate(event)" aria-label="Ver certificado Data Science">
+                        <img src="./certificates/data-science.png" alt="Certificado Data Science">
+                        <span class="certificate-label">Data Science</span>
+                    </button>
                 </div>
-                <div class="certificate-card" onclick="openCertificate(event)">
-                    <img src="./certificates/data-analyst.png" alt="Data Analyst con Python">
-                    <div class="certificate-label">Data Analyst con Python</div>
-                </div>
-            </div>
 
-            <div id="certificateModal" class="modal">
-                <div class="modal-content">
-                    <button class="modal-close" onclick="closeCertificate()">&times;</button>
-                    <img id="modalImage" src="" alt="Certificate">
+                <h3 class="sub">Idiomas</h3>
+                <div class="languages">
+                    <div class="lang"><span class="mono">ES</span>Nativo</div>
+                    <div class="lang"><span class="mono">EN</span>Intermedio (B1 — TOEFL ITP 2019)</div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Hobbies Section -->
-        <div class="section">
-            <h2 class="section-title">Intereses</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h4>🎵 Música</h4>
-                    <p style="margin: 8px 0 6px 0; color: var(--text-secondary); font-size: 13px;">Géneros</p>
-                    <div class="tech-stack" style="margin-bottom: 12px;">
-                        <span class="tech-badge">Rock</span>
-                        <span class="tech-badge">Grunge</span>
-                        <span class="tech-badge">Progressive Metal</span>
-                        <span class="tech-badge">Jazz Fusion</span>
-                    </div>
-                    <p style="margin: 8px 0 6px 0; color: var(--text-secondary); font-size: 13px;">Artistas</p>
-                    <div class="tech-stack" style="margin-bottom: 12px;">
-                        <span class="tech-badge">Opeth</span>
-                        <span class="tech-badge">Frank Zappa</span>
-                        <span class="tech-badge">King Crimson</span>
-                        <span class="tech-badge">Alice in Chains</span>
+                <div id="certificateModal" class="modal" role="dialog" aria-modal="true" aria-label="Certificado">
+                    <div class="modal-content">
+                        <button type="button" class="modal-close" onclick="closeCertificate()" aria-label="Cerrar">&times;</button>
+                        <img id="modalImage" src="" alt="">
                     </div>
                 </div>
-                <div class="skill-category">
-                    <h4>🎮 Gaming</h4>
-                    <p style="margin: 8px 0 6px 0; color: var(--text-secondary); font-size: 13px;">Juegos favoritos</p>
-                    <div class="tech-stack" style="margin-bottom: 12px;">
-                        <span class="tech-badge">World of Warcraft</span>
-                        <span class="tech-badge">Final Fantasy XIV</span>
-                        <span class="tech-badge">Chrono Trigger</span>
-                        <span class="tech-badge">Megaman</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h4>📚 Lectura</h4>
-                    <p style="margin: 8px 0 6px 0; color: var(--text-secondary); font-size: 13px;">Géneros</p>
-                    <div class="tech-stack" style="margin-bottom: 12px;">
-                        <span class="tech-badge">Ciencia Ficción</span>
-                        <span class="tech-badge">Fantasía</span>
-                        <span class="tech-badge">Manga</span>
-                    </div>
-                    <p style="margin: 8px 0 6px 0; color: var(--text-secondary); font-size: 13px;">Autores favoritos</p>
-                    <div class="tech-stack" style="margin-bottom: 12px;">
-                        <span class="tech-badge">Isaac Asimov</span>
-                        <span class="tech-badge">Frank Herbert</span>
-                        <span class="tech-badge">Eiichiro Oda</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+            </section>
+        </main>
 
-        <!-- Footer CTA -->
-        <div class="footer-cta">
-            <a href="./resume.pdf" class="btn btn-primary" download>📥 Descargar CV (PDF)</a>
-            <a href="./resume.md" class="btn btn-secondary">📄 Ver CV (Markdown)</a>
-        </div>
+        <footer class="footer">
+            <div class="cta">
+                <a href="./resume.pdf" class="btn btn-primary" download>↓ Descargar CV (PDF)</a>
+                <a href="./resume.md" class="btn btn-secondary">→ Ver CV (Markdown)</a>
+            </div>
+            <p class="offline"><span class="mono">// fuera de servicio</span>batería (prog metal, jazz fusion) · WoW y Chrono Trigger · Asimov, Herbert y Oda</p>
+            <p class="signoff">Raúl Cid Bastías · 2026 · Plan Seldon: en curso</p>
+        </footer>
     </div>
 
     <script>
         function openCertificate(event) {
             const img = event.currentTarget.querySelector('img');
-            const modal = document.getElementById('certificateModal');
             const modalImage = document.getElementById('modalImage');
             modalImage.src = img.src;
             modalImage.alt = img.alt;
-            modal.classList.add('active');
+            document.getElementById('certificateModal').classList.add('active');
+            document.querySelector('.modal-close').focus();
         }
+
         function closeCertificate() {
             document.getElementById('certificateModal').classList.remove('active');
         }
-        document.getElementById('certificateModal').addEventListener('click', function(event) {
+
+        document.getElementById('certificateModal').addEventListener('click', function (event) {
             if (event.target === this) closeCertificate();
         });
-        document.addEventListener('keydown', function(event) {
+
+        document.addEventListener('keydown', function (event) {
             if (event.key === 'Escape') closeCertificate();
         });
+
+        console.log(
+            '%c~/raul $ whoami%c\n¿Inspeccionando el código? Me gusta tu estilo. Hablemos: rad.cidbastias@gmail.com',
+            'color:#22d3ee;font-family:monospace;font-size:13px',
+            'color:inherit;font-family:monospace'
+        );
     </script>
 </body>
 </html>
